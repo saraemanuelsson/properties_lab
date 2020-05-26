@@ -12,4 +12,4 @@ require_relative('models/property')
 @property2.delete
 
 puts Property.find(2)
-puts Property.find(999)
+puts Property.find_by_address("EH3 9DR")

@@ -54,13 +54,12 @@ class Property
         db.close()
     end
 
-    def Property.find(id)
+    def Property.find_by_field(field, value)
         db = PG.connect( { dbname: 'properties', host: 'localhost' } )
         sql = "SELECT * FROM properties
-        WHERE id = $1"
-        value = [id]
+        WHERE #{field} = $1"
         db.prepare("find", sql)
-        property = db.exec_prepared("find", value)
+        property = db.exec_prepared("find", [value])
         db.close()
         if property.num_tuples == 0
             return nil
@@ -69,5 +68,12 @@ class Property
         end
     end
 
+    def Property.find(id)
+        Property.find_by_field("id", id)
+    end
+
+    def Property.find_by_address(address)
+        Property.find_by_field("address", address)
+    end
 end
 
