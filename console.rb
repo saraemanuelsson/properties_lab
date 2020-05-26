@@ -10,3 +10,5 @@ require_relative('models/property')
 @property2 =  Property.new({"address" => "BD7 OD3", "value" => 3000, "square_footage" => 2222, "build" => "flat"})
 @property2.save
 @property2.delete
+
+puts Property.find(2)
