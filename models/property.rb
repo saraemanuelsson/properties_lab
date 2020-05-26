@@ -29,4 +29,20 @@ class Property
         @id = db.exec_prepared("save", values)[0]["id"].to_i
         db.close
     end
+
+    def update()
+        db = PG.connect( { dbname: 'properties', host: 'localhost' } )
+        sql = "UPDATE properties
+        SET
+        (address, value, square_footage, build)
+        =
+        ($1, $2, $3, $4)
+        WHERE id = $5"
+        values = [@address, @value, @square_footage, @build, @id]
+        db.prepare("update", sql)
+        db.exec_prepared("update", values)
+        db.close()
+    end
+
+    
 end
