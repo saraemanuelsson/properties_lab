@@ -62,7 +62,11 @@ class Property
         db.prepare("find", sql)
         property = db.exec_prepared("find", value)
         db.close()
-        return Property.new(property[0])
+        if property.num_tuples == 0
+            return nil
+        else
+            return Property.new(property[0])
+        end
     end
 
 end

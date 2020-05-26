@@ -12,3 +12,4 @@ require_relative('models/property')
 @property2.delete
 
 puts Property.find(2)
+puts Property.find(999)
